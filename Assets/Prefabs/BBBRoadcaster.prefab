@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3924646512888846410}
   - component: {fileID: 8599620198207269039}
   - component: {fileID: 6319258449145301872}
+  - component: {fileID: 3928253337277289399}
   m_Layer: 10
   m_Name: BBBRoadcaster
   m_TagString: Untagged
@@ -96,3 +97,22 @@ MonoBehaviour:
   ballPrefab: {fileID: 8831111691617545661, guid: 6bacbff0abcad4b4eb8a10406f06609f,
     type: 3}
   speed: 2
+--- !u!95 &3928253337277289399
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264681988139230633}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c9dab6bd29d4504e9374c19277fba4b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
