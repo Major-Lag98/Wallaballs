@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuScrpit : MonoBehaviour
 {
+    bool InMenu = true;
+    bool InCredits = false;
 
     public GameObject creditPanel;
 
@@ -23,6 +25,18 @@ public class MenuScrpit : MonoBehaviour
     public GameObject quit;
     Animator quitAnimator;
 
+    public GameObject credBalls;
+    Animator credBallsAnimator;
+
+    public GameObject madeBy;
+    Animator madeByAnimator;
+
+    public GameObject special;
+    Animator specialAnimator;
+
+    public GameObject nice;
+    Animator niceAnimator;
+
     void Start()
     {
         titleAnimator = title.GetComponent<Animator>();
@@ -30,11 +44,17 @@ public class MenuScrpit : MonoBehaviour
         playAnimator = play.GetComponent<Animator>();
         creditsAnimator = credits.GetComponent<Animator>();
         quitAnimator = quit.GetComponent<Animator>();
+
+        credBallsAnimator = credBalls.GetComponent<Animator>();
+        madeByAnimator = madeBy.GetComponent<Animator>();
+        specialAnimator = special.GetComponent<Animator>();
+        niceAnimator = nice.GetComponent<Animator>();
     }
     public void Play()
     {
-        Debug.Log("Playing...");
-        StartCoroutine("WaitAndLoad");
+        //Debug.Log("Playing...");
+        InMenu = false;
+        StartCoroutine("WaitAndLoadGame");
     }
 
     public void Quit()
@@ -46,23 +66,57 @@ public class MenuScrpit : MonoBehaviour
     public void Credits()
     {
         Debug.Log("Showing Credits...");
-        creditPanel.SetActive(true);
+        InMenu = false;
+        InCredits = true;
+        StartCoroutine("WaitAndLoadCredits");
+        //creditPanel.SetActive(true);
         //
     }
 
     public void Nice()
     {
-        creditPanel.SetActive(false);
+        InCredits = false;
+        InMenu = true;
+        StartCoroutine("WaitAndLoadMenu");
+        //creditPanel.SetActive(false);
     }
 
-    IEnumerator WaitAndLoad()
+    void menuAnimationBools()
     {
-        titleAnimator.SetBool("InMenu", false);
-        ballAnimator.SetBool("InMenu", false);
-        playAnimator.SetBool("InMenu", false);
-        creditsAnimator.SetBool("InMenu", false);
-        quitAnimator.SetBool("InMenu", false);
+        titleAnimator.SetBool("InMenu", InMenu);
+        ballAnimator.SetBool("InMenu", InMenu);
+        playAnimator.SetBool("InMenu", InMenu);
+        creditsAnimator.SetBool("InMenu", InMenu);
+        quitAnimator.SetBool("InMenu", InMenu);
+    }
+    void creditsAnimationBools()
+    {
+        credBallsAnimator.SetBool("InCredits", InCredits);
+        madeByAnimator.SetBool("InCredits", InCredits);
+        specialAnimator.SetBool("InCredits", InCredits);
+        niceAnimator.SetBool("InCredits", InCredits);
+    }
+
+    IEnumerator WaitAndLoadGame()
+    {
+        menuAnimationBools();
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("GameScene");
+    }
+
+    IEnumerator WaitAndLoadCredits()
+    {
+        menuAnimationBools();
+        yield return new WaitForSeconds(1);
+        creditPanel.SetActive(true);
+        creditsAnimationBools();
+    }
+
+    IEnumerator WaitAndLoadMenu()
+    {
+        creditsAnimationBools();
+        yield return new WaitForSeconds(1);
+        creditPanel.SetActive(false);
+        menuAnimationBools();
     }
 }
