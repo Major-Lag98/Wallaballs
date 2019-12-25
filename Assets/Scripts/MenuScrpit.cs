@@ -52,7 +52,7 @@ public class MenuScrpit : MonoBehaviour
     }
     public void Play()
     {
-        //Debug.Log("Playing...");
+        Debug.Log("Playing...");
         InMenu = false;
         StartCoroutine("WaitAndLoadGame");
     }
@@ -69,8 +69,6 @@ public class MenuScrpit : MonoBehaviour
         InMenu = false;
         InCredits = true;
         StartCoroutine("WaitAndLoadCredits");
-        //creditPanel.SetActive(true);
-        //
     }
 
     public void Nice()
@@ -78,7 +76,6 @@ public class MenuScrpit : MonoBehaviour
         InCredits = false;
         InMenu = true;
         StartCoroutine("WaitAndLoadMenu");
-        //creditPanel.SetActive(false);
     }
 
     void menuAnimationBools()
