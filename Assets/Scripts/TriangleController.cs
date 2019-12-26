@@ -6,6 +6,8 @@ public class TriangleController : MonoBehaviour
 {
 
     public bool animationDone = false;
+    bool startEnabled = true;
+
     bool iFramesPlaying = false;
 
     public float speed = 1;
@@ -41,8 +43,6 @@ public class TriangleController : MonoBehaviour
         ballSpawner = gameController.GetComponent<BallSpawner>();
         currentHealth = maxHealth;
 
-        StartCoroutine("WaitForStart");
-        
     }
 
 
@@ -62,6 +62,11 @@ public class TriangleController : MonoBehaviour
             //rotation
             float rotation = Input.GetAxis("Rotation");
             rigidbody2d.AddTorque(-rotation); //Possibly better if i use transform, idk what i like yet
+            if (startEnabled == true)
+            {
+                spriteRenderer.enabled = true;
+                startEnabled = false;
+            }
         }
         if (isInvincible)
         {
@@ -72,9 +77,9 @@ public class TriangleController : MonoBehaviour
                 Debug.Log("Starting IFrames");
                 iFramesPlaying = true;
             }
-            
-            
-            
+
+
+
             if (invincibleTimer <= 0)
             {
                 isInvincible = false;
@@ -82,12 +87,17 @@ public class TriangleController : MonoBehaviour
                 Debug.Log("Stoping IFrames");
                 iFramesPlaying = false;
                 spriteRenderer.enabled = true;
-                
+
             }
         }
 
     }
-    
+
+    public void animDone()
+    {
+        animationDone = true;
+    }
+
     public void ChangeHealth(int amount)
     {
         if (isInvincible)
@@ -137,13 +147,6 @@ public class TriangleController : MonoBehaviour
 
     }
 
-
-    IEnumerator WaitForStart()
-    {
-        yield return new WaitForSeconds(1);
-        spriteRenderer.enabled = true;
-        animationDone = true;
-    }
     IEnumerator IFrames()
     {
         while (true) 
