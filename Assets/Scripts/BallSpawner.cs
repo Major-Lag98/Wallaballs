@@ -32,7 +32,12 @@ public class BallSpawner : MonoBehaviour //Spawn balls based on the timer //i al
     float bigBallDecPeriod = 20.0f;
     float missileDecPreiod = 25.0f;
     float wallDecPeriod = 30.0f;
-    float timer = 0.0f;
+    
+    float timer = 0f;
+
+    //bool countDownFinished = false;
+
+    //public float startTime = 3;
     //
 
     public GameObject broadcasterPrefab;
@@ -42,14 +47,14 @@ public class BallSpawner : MonoBehaviour //Spawn balls based on the timer //i al
     public GameObject deathUI;
 
     //public GameObject pauseMenue;
-
+    public GameObject timerTMP;
     TextMeshProUGUI myText;
 
     // Start is called before the first frame update
     void Start()
     {
         //pauseMenue = GameObject.Find("PauseMenue");
-        myText = GetComponentInChildren<TextMeshProUGUI>();
+        myText = timerTMP.GetComponentInChildren<TextMeshProUGUI>();
 
     }
 
@@ -59,6 +64,8 @@ public class BallSpawner : MonoBehaviour //Spawn balls based on the timer //i al
 
 
         //ball spawner
+        //if (countDownFinished == true)//(timer <= 0 || countDownFinished) 
+        //{
         if (alive)
         {
 
@@ -80,7 +87,15 @@ public class BallSpawner : MonoBehaviour //Spawn balls based on the timer //i al
             timer += Time.deltaTime;
         }
         else deathUI.SetActive(true);
-
+        //}
+        //else
+        //{
+            //timer -= Time.deltaTime;
+            //if (timer <= 0)
+            //{
+            //    countDownFinished = true;
+            //}
+        //}
 
         if (ballSpawnPeriod <= 0 || bigBallSpawnPeriod <= 0 || missileSpawnPeriod <=0 || wallSpawnPeriod <= 0)
         {

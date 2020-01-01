@@ -20,7 +20,7 @@ public class Broadcaster : MonoBehaviour
         trianglePosition = GameObject.Find("Triangle").GetComponent<Rigidbody2D>().position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         position = gameObject.transform.position;
-        StartCoroutine("Fade");
+        //StartCoroutine("Fade");
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class Broadcaster : MonoBehaviour
             normBall.GetComponent<Rigidbody2D>().velocity = towardPlayer * speed;
         }
     }
-
+    /*
     IEnumerator Fade() //Coroutines!!!
     {
 
@@ -57,4 +57,5 @@ public class Broadcaster : MonoBehaviour
 
         
     }
+    */
 }

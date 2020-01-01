@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4672107612888611159}
   - component: {fileID: 333148954718297505}
   - component: {fileID: 1812927257737196755}
+  - component: {fileID: 2416971027089511904}
   m_Layer: 10
   m_Name: BallBroadcaster
   m_TagString: Untagged
@@ -97,3 +98,22 @@ MonoBehaviour:
   ballPrefab: {fileID: 1366657884073395842, guid: 56b572c827daa3d4b87904d82ac09c93,
     type: 3}
   speed: 3
+--- !u!95 &2416971027089511904
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222828350354678413}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3e65e2fd9432c2e4caa8be806a6df60b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

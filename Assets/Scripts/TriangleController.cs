@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class TriangleController : MonoBehaviour
 {
+
+    public bool animationDone = false;
+    bool startEnabled = true;
+
+    bool iFramesPlaying = false;
+
     public float speed = 1;
 
     float invincibleTimer = 3.0f;
@@ -31,81 +37,95 @@ public class TriangleController : MonoBehaviour
 
     void Start()
     {
-        //set health && get ridgidbody ready for movement
         rigidbody2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        GameObject gameController = GameObject.Find("CanvasGameController");
+        GameObject gameController = GameObject.Find("GameController");
         ballSpawner = gameController.GetComponent<BallSpawner>();
-        pc3hp.enabled = true;
         currentHealth = maxHealth;
+
     }
 
 
     void Update()
     {
+
         //movement
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Vector2 move = new Vector2(horizontal, vertical); //vector2 for new movement
-        Vector2 position = rigidbody2d.position;
-        position = position + move * speed;
-        rigidbody2d.MovePosition(position);
+        if (animationDone)
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+            Vector2 move = new Vector2(horizontal, vertical); //vector2 for new movement
+            Vector2 position = rigidbody2d.position;
+            position = position + move * speed;
+            rigidbody2d.MovePosition(position);
 
-        //rotation
-        float rotation = Input.GetAxis("Rotation");
-        rigidbody2d.AddTorque(rotation); //Possibly better if i use transform, idk what i like yet
-
+            //rotation
+            float rotation = Input.GetAxis("Rotation");
+            rigidbody2d.AddTorque(-rotation); //Possibly better if i use transform, idk what i like yet
+            if (startEnabled == true)
+            {
+                spriteRenderer.enabled = true;
+                startEnabled = false;
+            }
+        }
         if (isInvincible)
         {
             invincibleTimer -= Time.deltaTime;
-            if (currentHealth > 0)
+            if (iFramesPlaying == false)
             {
-                blink();
+                StartCoroutine("IFrames");
+                Debug.Log("Starting IFrames");
+                iFramesPlaying = true;
             }
-            
-            
+
+
+
             if (invincibleTimer <= 0)
             {
                 isInvincible = false;
-                if (ballSpawner.alive == true)
-                {
-                    spriteRenderer.enabled = true;
-                }
-                else spriteRenderer.enabled = false;
-                
+                StopCoroutine("IFrames");
+                Debug.Log("Stoping IFrames");
+                iFramesPlaying = false;
+                spriteRenderer.enabled = true;
+
             }
         }
 
     }
-    
+
+    public void animDone()
+    {
+        animationDone = true;
+    }
+
     public void ChangeHealth(int amount)
     {
+        if (isInvincible)
+        {
+            return;
+        }
+
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+
         if (amount < 0) //Take Damage
         {
             
-            if (isInvincible)
+            if (currentHealth > 0) //havent died yet
             {
-                return;
+                isInvincible = true;
+                invincibleTimer = timeInvincible;
             }
-
-            isInvincible = true;
-            invincibleTimer = timeInvincible;
-
 
         }
         else if (amount > 0)//heal
         {
             //Debug.Log("Pretend this is a heal animation");
-            //healEffect.Play();
         }
 
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         
-
         //change sprite based on health
         if (currentHealth == 2)
         {
-
             spriteRenderer.sprite = twohp;
             pc3hp.enabled = false;
             pc2hp.enabled = true;
@@ -122,22 +142,21 @@ public class TriangleController : MonoBehaviour
             pc1hp.enabled = false;
             ballSpawner.alive = false;
         }
+        
         Debug.Log(currentHealth + "/" + maxHealth);
 
     }
 
-
-    void blink() //for invincible frames
+    IEnumerator IFrames()
     {
-        
-            if (Time.fixedTime % .3 < .2)
-            {
-                spriteRenderer.enabled = false;
-            }
-            else
-            {
-                spriteRenderer.enabled = true;
-            }
-        
+        while (true) 
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(.1f);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(.1f);
+        }
+           
     }
+    
 }

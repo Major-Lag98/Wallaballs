@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4517290647597363042}
   - component: {fileID: 8999926256275266500}
   - component: {fileID: 4410169720835397515}
+  - component: {fileID: 1430449454750432740}
   m_Layer: 10
   m_Name: PreMissile
   m_TagString: Untagged
@@ -97,3 +98,22 @@ MonoBehaviour:
   ballPrefab: {fileID: 4099458379767833453, guid: a2c1a0ef9f6d73349895c745b80b97ac,
     type: 3}
   speed: 1
+--- !u!95 &1430449454750432740
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127861691396234666}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 51f4e674b39daa848b81c2c8bc728099, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
