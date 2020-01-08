@@ -23,27 +23,31 @@ public class BallSpawner : MonoBehaviour //Spawn balls based on the timer //i al
     float bigBallSpawnPeriodMax = 10.0f;
 
     float missileSpawnPeriod = 0.1f;
-    float missileSpawnPeriodMax = 15.0f;
+    float missileSpawnPeriodMax = 14.0f;
 
     float wallSpawnPeriod = 0.1f;
     float wallSpawnPeriodMax = 10.0f;
+
+    float weirdBallSpawnPeriod = 0.1f;
+    float weirdBallSpawnPeriodMax = 12.0f;
 
     float ballDecPeriod = 15.0f;
     float bigBallDecPeriod = 20.0f;
     float missileDecPreiod = 25.0f;
     float wallDecPeriod = 30.0f;
+    float weirdBallDecPeriod = 30.0f;
+
     
     float timer = 0f;
 
-    //bool countDownFinished = false;
-
-    //public float startTime = 3;
+    
     //
 
-    public GameObject broadcasterPrefab;
+    public GameObject NormBallWarning;
     public GameObject bigBallBroadcasterPrefab;
-    public GameObject missleWarning;
+    public GameObject missileWarning;
     public GameObject wallWarning;
+    public GameObject WeirdBallWarning;
     public GameObject deathUI;
 
     //public GameObject pauseMenue;
@@ -63,14 +67,13 @@ public class BallSpawner : MonoBehaviour //Spawn balls based on the timer //i al
     {
 
 
-        //ball spawner
-        //if (countDownFinished == true)//(timer <= 0 || countDownFinished) 
-        //{
+        
         if (alive)
         {
 
             ballSpawnPeriod -= Time.deltaTime;
-
+            
+            //introduce new balls after a certain amount of time
             if (timer >= 10)
             {
                 bigBallSpawnPeriod -= Time.deltaTime;
@@ -83,21 +86,17 @@ public class BallSpawner : MonoBehaviour //Spawn balls based on the timer //i al
             {
                 wallSpawnPeriod -= Time.deltaTime;
             }
+            if (timer >= 40)
+            {
+                weirdBallSpawnPeriod -= Time.deltaTime;
+            }
 
             timer += Time.deltaTime;
         }
         else deathUI.SetActive(true);
-        //}
-        //else
-        //{
-            //timer -= Time.deltaTime;
-            //if (timer <= 0)
-            //{
-            //    countDownFinished = true;
-            //}
-        //}
+        
 
-        if (ballSpawnPeriod <= 0 || bigBallSpawnPeriod <= 0 || missileSpawnPeriod <=0 || wallSpawnPeriod <= 0)
+        if (ballSpawnPeriod <= 0 || bigBallSpawnPeriod <= 0 || missileSpawnPeriod <=0 || wallSpawnPeriod <= 0 || weirdBallSpawnPeriod <= 0)
         {
             switch (Random.Range(0, 8))
             {
@@ -173,19 +172,18 @@ public class BallSpawner : MonoBehaviour //Spawn balls based on the timer //i al
                     else spawnBall(x_min, Random.Range(0.0f, y_max));
                     break;
             }
-            ballSpawnPeriod = ballSpawnPeriodMax;//reset cooldown
+            //ballSpawnPeriod = ballSpawnPeriodMax;//reset cooldown
             
         }
 
-        //timer
-        
 
+        //timer
         int minutes = Mathf.FloorToInt(timer / 60F);
         int seconds = Mathf.FloorToInt(timer - minutes * 60);
         myText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        //make ball spawn more often
 
+        //make balls spawn more often
         if (timer > ballDecPeriod) //normal balls
         {
             ballSpawnPeriodMax = Mathf.Round(Mathf.Clamp(ballSpawnPeriodMax - 0.05f, 0.25f, ballSpawnPeriodMax) * 100)/100f; 
@@ -196,37 +194,49 @@ public class BallSpawner : MonoBehaviour //Spawn balls based on the timer //i al
         {
             bigBallSpawnPeriodMax = Mathf.Round(Mathf.Clamp(bigBallSpawnPeriodMax - 0.05f, 0.25f, bigBallSpawnPeriodMax) * 100) / 100f;
             bigBallDecPeriod += 15;
-            Debug.Log("Time decremented, new time = " + ballSpawnPeriodMax);
+            Debug.Log("BB Time decremented, new time = " + bigBallSpawnPeriodMax);
         }
         if (timer > missileDecPreiod) //missiles
         {
             missileSpawnPeriodMax = Mathf.Round(Mathf.Clamp(missileSpawnPeriodMax - 0.05f, 0.25f, missileSpawnPeriodMax) * 100) / 100f;
             missileDecPreiod += 15;
-            Debug.Log("Time decremented, new time = " + ballSpawnPeriodMax);
+            Debug.Log("Missile time decremented, new time = " + missileSpawnPeriodMax);
         }
         if (timer > wallDecPeriod) //walls
         {
             wallSpawnPeriodMax = Mathf.Round(Mathf.Clamp(wallSpawnPeriodMax - 0.05f, 0.25f, wallSpawnPeriodMax) * 100) / 100f;
             wallDecPeriod += 15;
-            Debug.Log("Time decremented, new time = " + ballSpawnPeriodMax);
+            Debug.Log("Wall time decremented, new time = " + wallSpawnPeriodMax);
+        }
+        if (timer > weirdBallDecPeriod)
+        {
+            weirdBallSpawnPeriodMax = Mathf.Round(Mathf.Clamp(weirdBallSpawnPeriodMax - 0.05f, 0.25f, weirdBallSpawnPeriodMax) * 100) / 100f;
+            weirdBallDecPeriod += 15;
+            Debug.Log("Weird time decremented, new time = " + weirdBallSpawnPeriodMax);
         }
     }
     void spawnBall(float locationX, float locationY) //spawn a ball at where you want it
     {
         Vector2 spawnLoc = new Vector2(locationX, locationY);
+        if (ballSpawnPeriod <= 0)
+        {
+            GameObject broadcast = Instantiate(NormBallWarning, spawnLoc, Quaternion.identity);
+            ballSpawnPeriod = ballSpawnPeriodMax;
+        }
         if (bigBallSpawnPeriod <= 0)//spawn big ball
         {
             GameObject bbBroadcast = Instantiate(bigBallBroadcasterPrefab, spawnLoc, Quaternion.identity);
             bigBallSpawnPeriod = bigBallSpawnPeriodMax;
         }
-        else if (missileSpawnPeriod <= 0) //spawn missile
+        if (missileSpawnPeriod <= 0) //spawn missile
         {
-            GameObject preMissle = Instantiate(missleWarning, spawnLoc, Quaternion.identity);
+            GameObject preMissle = Instantiate(missileWarning, spawnLoc, Quaternion.identity);
             missileSpawnPeriod = missileSpawnPeriodMax;
         }
-        else //spawn normal ball
+        if (weirdBallSpawnPeriod <= 0)
         {
-            GameObject broadcast = Instantiate(broadcasterPrefab, spawnLoc, Quaternion.identity);
+            GameObject preWeird = Instantiate(WeirdBallWarning, spawnLoc, Quaternion.identity);
+            weirdBallSpawnPeriod = weirdBallSpawnPeriodMax;
         }
     }
 

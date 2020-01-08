@@ -925,7 +925,7 @@ MonoBehaviour:
   credBalls: {fileID: 1275860694}
   madeBy: {fileID: 558502322}
   special: {fileID: 693082991}
-  nice: {fileID: 1328750007}
+  nice: {fileID: 1668391450}
 --- !u!1 &470716916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1115,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Made by Alden Smith
+  m_text: Made by Major Lag
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33fbd7e709e011f4aa9ade5c093df0c0, type: 2}
   m_sharedMaterial: {fileID: -7957351594734773454, guid: 33fbd7e709e011f4aa9ade5c093df0c0,
@@ -1652,7 +1652,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Special thanks to Mia Visser
+  m_text: Special thanks to Ginko
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33fbd7e709e011f4aa9ade5c093df0c0, type: 2}
   m_sharedMaterial: {fileID: -7957351594734773454, guid: 33fbd7e709e011f4aa9ade5c093df0c0,
@@ -2738,7 +2738,6 @@ GameObject:
   - component: {fileID: 1328750008}
   - component: {fileID: 1328750010}
   - component: {fileID: 1328750009}
-  - component: {fileID: 1328750011}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2884,25 +2883,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328750007}
   m_CullTransparentMesh: 0
---- !u!95 &1328750011
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1328750007}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 156faf5ae3c12b84a93f36b83600ffbf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1453501246
 GameObject:
   m_ObjectHideFlags: 0
@@ -3067,6 +3047,7 @@ GameObject:
   - component: {fileID: 1668391454}
   - component: {fileID: 1668391453}
   - component: {fileID: 1668391452}
+  - component: {fileID: 1668391455}
   m_Layer: 5
   m_Name: Nice
   m_TagString: Untagged
@@ -3091,7 +3072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015259, y: -403}
+  m_AnchoredPosition: {x: 0, y: -403}
   m_SizeDelta: {x: 548.4, y: 202.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668391452
@@ -3118,7 +3099,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.09803922}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 0.19607843}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 0}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3132,7 +3113,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1668391453}
   m_OnClick:
     m_PersistentCalls:
@@ -3184,6 +3165,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668391450}
   m_CullTransparentMesh: 0
+--- !u!95 &1668391455
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668391450}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8de2490158226804796516ed7733c062, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1687892583
 GameObject:
   m_ObjectHideFlags: 0
