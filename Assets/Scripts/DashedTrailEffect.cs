@@ -13,6 +13,10 @@ public class DashedTrailEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+    private void FixedUpdate()
+    {
         if (timeBtwSpawns <= 0)
         {
             GameObject line = Instantiate(dash, transform.position, transform.rotation);
@@ -23,6 +27,5 @@ public class DashedTrailEffect : MonoBehaviour
         {
             timeBtwSpawns -= Time.deltaTime;
         }
-        
     }
 }
