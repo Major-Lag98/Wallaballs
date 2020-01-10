@@ -32,7 +32,7 @@ public class BallSpawner : MonoBehaviour //Spawn balls based on the timer //i al
     float weirdBallSpawnPeriodMax = 12.0f;
 
     float ZBallSpawnPeriod = 0.01f;
-    float ZBallSpawnPeriodMax = 17.0f;
+    float ZBallSpawnPeriodMax = 2.0f;
 
     float ballDecPeriod = 15.0f;
     float bigBallDecPeriod = 20.0f;
@@ -76,26 +76,26 @@ public class BallSpawner : MonoBehaviour //Spawn balls based on the timer //i al
         if (alive)
         {
 
-            ballSpawnPeriod -= Time.deltaTime;
+            //ballSpawnPeriod -= Time.deltaTime;
             
             //introduce new balls after a certain amount of time
             if (timer >= 10)
             {
-                bigBallSpawnPeriod -= Time.deltaTime;
+                //bigBallSpawnPeriod -= Time.deltaTime;
             }
             if (timer >= 20)
             {
-                missileSpawnPeriod -= Time.deltaTime;
+                //missileSpawnPeriod -= Time.deltaTime;
             }
             if (timer >= 30)
             {
-                wallSpawnPeriod -= Time.deltaTime;
+                //wallSpawnPeriod -= Time.deltaTime;
             }
             if (timer >= 40)
             {
-                weirdBallSpawnPeriod -= Time.deltaTime;
+                //weirdBallSpawnPeriod -= Time.deltaTime;
             }
-            if (timer >= 50)
+            if (timer >= 0)
             {
                 ZBallSpawnPeriod -= Time.deltaTime;
             }
