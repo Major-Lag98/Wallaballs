@@ -6,9 +6,6 @@ I think hes confused.
 It's a wall... Of balls?
 
 Very simple BulletHell type game.
-
 Game never ends and score is based on how long you last.
-
 Game gets progressivly harder as time goes on.
-
 New harder balls are introduced as time goes on.
